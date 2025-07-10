@@ -1,0 +1,12 @@
+Volúmenes y persistencia
+Crea una carpeta local con un archivo HTML:
+
+mkdir html
+echo "<h1>Hola Docker Volumes</h1>" > html/index.html
+
+Ejecuta Nginx montando la carpeta como volumen:
+
+
+docker run --name nginx-vol -d -p 8081:80 -v "$PWD/html":/usr/share/nginx/html nginx
+
+Edita el archivo html/index.html en tu PC, recarga el navegador en http://localhost:8081 y verás el cambio reflejado sin reiniciar el contenedor.

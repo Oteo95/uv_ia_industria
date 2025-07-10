@@ -1,0 +1,71 @@
+Ejercicio integrador final
+Mini-app Flask + MySQL usando Docker Compose:
+
+Estructura de archivos:
+
+myproject/
+  app.py
+  requirements.txt
+  Dockerfile
+  docker-compose.yml
+ 
+
+#app.py:
+
+from flask import Flask
+import mysql.connector
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    conn = mysql.connector.connect(
+        host='db',
+        user='root',
+        password='clave123'
+    )
+    return '¡Conexión exitosa a MySQL desde Flask en Docker!'
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
+
+
+# requirements.txt:
+
+nginx
+flask
+mysql-connector-python
+Dockerfile:
+
+# dockerfile
+
+FROM python:3.11-slim
+WORKDIR /app
+COPY . /app
+RUN pip install -r requirements.txt
+CMD ["python", "app.py"]
+
+
+
+# docker-compose.yml:
+
+
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: clave123
+    ports:
+      - "3307:3306"
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+Arranca el entorno:
+
+
+docker compose up -d
+Accede a http://localhost:5000 y deberías ver el mensaje de conexión exitosa.
+
