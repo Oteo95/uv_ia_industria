@@ -18,12 +18,12 @@ def home():
 
 @app.get('/calculate_salary')
 def predict_get(country: str, education_level: str, years_of_experience: int):
-    output=3
+    output=31111
     return {'The estimated salary is {}'.format(output)}
 
 @app.post('/predict_salary')
 def predict_post(request: SalaryPredictionRequest):
-    output = 100
+    output = 100111
     return {'The estimated salary is {}'.format(output)}
 
 if __name__ == '__main__':
