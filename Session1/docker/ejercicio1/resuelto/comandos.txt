@@ -1,4 +1,0 @@
-#CONSTUIR LA IMAGEN
-docker build -t mi-python-app .
-#EJECUTAR EL CONTENEDOR
-docker run mi-python-app
